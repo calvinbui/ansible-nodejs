@@ -1,0 +1,43 @@
+---
+# https://github.com/nodesource/distributions/blob/master/README.md
+
+- name: Remove Chris Lea's Node.js PPA
+  apt_repository:
+    repo: 'ppa:chris-lea/node.js'
+    state: absent
+
+- name: Remove Chris Lea's Node.js PPA files
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "/etc/apt/sources.list.d/chris-lea-node_js-*.list"
+    - "/etc/apt/sources.list.d/chris-lea-node_js-*.list.save"
+
+- name: Install dependencies
+  apt:
+    name:
+      - apt-transport-https
+      - build-essential
+    state: present
+    update_cache: true
+
+- name: Add NodeSource GPG key
+  apt_key:
+    url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+    id: 9FD3B784BC1C6FC31A8A0A1C1655A0AB68576280
+    state: present
+
+- name: Add NodeSource repositories for Node.js.
+  apt_repository:
+    repo: "{{ item }}"
+    state: present
+  with_items:
+    - "deb https://deb.nodesource.com/node_{{ nodejs_version }}.x {{ ansible_distribution_release }} main"
+    - "deb-src https://deb.nodesource.com/node_{{ nodejs_version }}.x {{ ansible_distribution_release }} main"
+
+- name: Install nodejs
+  apt:
+    name: "nodejs={{ nodejs_version }}*"
+    state: present
+    update_cache: true
