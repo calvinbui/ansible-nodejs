@@ -20,12 +20,20 @@
       - apt-transport-https
       - build-essential
     state: present
+  register: result
+  until: result is success
+  retries: 5
+  delay: 5
 
 - name: Add NodeSource GPG key
   apt_key:
     url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
     id: 9FD3B784BC1C6FC31A8A0A1C1655A0AB68576280
     state: present
+  register: result
+  until: result is success
+  retries: 5
+  delay: 5
 
 - name: Add NodeSource apt repositories
   apt_repository:
@@ -40,6 +48,10 @@
   apt:
     name: "nodejs={{ nodejs_version }}*"
     state: present
+  register: result
+  until: result is success
+  retries: 5
+  delay: 5
 
 - name: Install npm packages
   npm:
