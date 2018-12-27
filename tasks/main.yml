@@ -40,3 +40,16 @@
   apt:
     name: "nodejs={{ nodejs_version }}*"
     state: present
+
+- name: Install npm packages
+  npm:
+    name: "{{ (item.name | default(omit)) if item.path is defined else (item.name | default(item)) }}"
+    version: "{{ item.version | default(omit) }}"
+    global: "{{ omit if item.path is defined else (item.global | default('true')) }}"
+    ignore_scripts: "{{ item.ignore_scripts | default(omit) }}"
+    path: "{{ item.path | default(omit) }}"
+    production: "{{ item.production | default(omit) }}"
+    registry: "{{ item.registry | default(omit) }}"
+    state: "{{ item.state | default(omit) }}"
+    executable: "{{ item.executable | default(omit) }}"
+  loop: "{{ nodejs_install_packages }}"
