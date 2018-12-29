@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/calvinbui/ansible-nodejs.svg?branch=master)](https://travis-ci.com/calvinbui/ansible-nodejs)
+
 # Ansible NodeJS
 
 An Ansible role that installs NodeJS & NPM on Ubuntu based on the official installation instructions.
