@@ -3,7 +3,8 @@
 nodejs_version: 8
 
 nodejs_install_packages:
-  - lodash
+  - name: lodash
+    global: true
   - name: request
     state: present
     version: 2.88.0
