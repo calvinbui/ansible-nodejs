@@ -14,51 +14,19 @@ N/A
 
 `nodejs_install_packages`: A list of packages to install with the npm module. Set it to `[]` if no packages are required.
 
-[All available options used in the npm module can be used here as well](https://docs.ansible.com/ansible/2.7/modules/npm_module.html). Available options:
+[All available options used in the npm module can be used here as well](https://docs.ansible.com/ansible/2.7/modules/npm_module.html). Set it exactly the same as the pip module, e.g.
 
 ```
-name
-version
-state
-executable
-global
-ignore_scripts
-path
-production
-registry
-```
-
-Notes:
-- `global` is omitted if `path` is defined. `global` is 'true' otherwise.
-
-Examples:
-
-```yaml
-npm_install_packages:
-  # by itself installs with 'global'
-  - lodash
-
-  # with path will define where to install
-  - name: express
-    path: /home/calvin/my-node-app/
-
-  # with some options
-  - name: requests
+nodejs_install_packages:
+  - name: lodash
+    global: true
+  - name: request
     state: present
     version: 2.88.0
-    ignore_scripts: true
-
-  # within a project
-  - name: chalk
-    path: /home/calvin/my-node-app/
-
-  # within a project, install the package.json
-  - path: /home/calvin/my-node-app/
+    global: true
     production: true
-
-  # with a different executable than bin path (i.e. nvm)
-  - path: /home/calvin/my-node-app/
-    executable: /opt/nvm/v0.10.1/bin/npm
+    ignore_scripts: true
+  - ...
 ```
 
 ## Dependencies
