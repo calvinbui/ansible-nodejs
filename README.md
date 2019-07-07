@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.com/calvinbui/ansible-nodejs.svg?branch=master)](https://travis-ci.com/calvinbui/ansible-nodejs)
+![GitHub release](https://img.shields.io/github/release/calvinbui/ansible-nodejs.svg)
 ![Ansible Quality Score](https://img.shields.io/ansible/quality/35860.svg)
 ![Ansible Role](https://img.shields.io/ansible/role/d/35860.svg)
 
